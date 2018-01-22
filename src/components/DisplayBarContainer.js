@@ -16,7 +16,7 @@ import DisplayBar from './DisplayBar';
 class DisplayBarContainer extends Component {
   render() {
     return (
-        <div>
+        <div className="DisplaybarContainer">
         {
             this.props.data.map((d) => {
                 return <DisplayBar key={d.artist} artist={d.artist} songTitle={d.songTitle}/>;

@@ -33,7 +33,7 @@ class MyNav extends Component {
   render() {
     return (
       <div className="navigation" >
-      <Navbar color="faded" light expand="md">
+      <Navbar color="dark" inverse expand="md" className="navbar-dark">
         <NavbarBrand diabled href="/">{this.props.user_name}</NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>

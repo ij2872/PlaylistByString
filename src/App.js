@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import './resc/bootstrap.min.css';
+import {Container, Row, Col} from 'reactstrap';
 
 import MyNav from './components/MyNav';
 import DisplayBarContainer from './components/DisplayBarContainer';
@@ -20,9 +21,16 @@ class App extends Component {
     return (
       <div className="App">
         <MyNav user_name="user"/>
-        <DisplayBarContainer data={SongArray}/>
-        
-
+        <Container className="content">
+          <Row>
+            <Col md="4" sm="12">
+              <DisplayBarContainer title="Created" data={SongArray} />            
+            </Col>
+            <Col md="8" sm="12">
+              <DisplayBarContainer title="Created" data={SongArray}/>              
+            </Col>
+          </Row>
+        </Container>
       {/** 
         <DisplayBar artist="donnie trumpet" songTitle="Sunday Candy" editable={true} />
         <header className="App-header">
