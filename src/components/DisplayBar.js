@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
 
 
+
+const DBStyle = {
+    displaybar: {
+        backgroundColor: "#222"
+    },
+    title: {
+
+    },
+    artist: {
+
+    }
+};
+
 // <Displaybar artist songTitle editable/>
 //      artist     =   {String}
 //      songTitle  =   {String}
@@ -13,7 +26,7 @@ import React, { Component } from 'react';
 class DisplayBar extends Component {
   render() {
     return (
-        <div className="Displaybar">
+        <div className="Displaybar" style={DBStyle.displaybar}>
             <div className="Displaybar-close">
                 {this.props.editable === true ? 'Edit' : '' }
             </div>

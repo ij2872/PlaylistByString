@@ -23,10 +23,12 @@ const DBStyle = {
     footer: {
         height: "auto",
         backgroundColor: "rgb(70, 70, 70)",
-        padding: "10px 0px 5px 0"
+        padding: "10px 5px 5px 0",
+        textAlign: "right"
+    },
+    button: {
+        type: "info"
     }
-
-    
 };
 // --- END STYLES ---
 
@@ -42,8 +44,8 @@ const DBStyle = {
 //      data      =     {
 //                            artist:       {String},
 //                            songTitle:    {String},
-//                            color:        {String},
-//                            button:       {String}
+//                            color:        {String}(true|false),
+//                            button:       {String}(true|false)
 //                      }       
 //  
 class DisplayBarContainer extends Component {
@@ -60,15 +62,9 @@ class DisplayBarContainer extends Component {
             {
                 //if button is requested
                 this.props.button 
-                ?   <Row> 
-                        <Col xs="10"></Col> 
-                        <Col xs="2">
-                            <Button className="Displaybar-button"  size="sm" color="info">
-                                {this.props.button}
-                            </Button>
-                        </Col>
-                    </Row>
-                    
+                ?   <Button className={"Displaybar-button " + (this.props.buttonDisabled === true ? 'disabled' : ' ')} size="sm" color={DBStyle.button.color} onClick={this.props.click}>
+                        {this.props.button}
+                    </Button>
                 : ""
             }
             </div>

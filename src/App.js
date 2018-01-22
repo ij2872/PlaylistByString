@@ -17,23 +17,60 @@ SongArray.push({artist: "Artist", songTitle: "Song"});
 
 
 class App extends Component {
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+      PlaylistSongs: [
+        { id: 0, artist: "Artist", songTitle: "Song" },
+        { id: 1, artist: "Artist2", songTitle: "Song2" },
+        { id: 2, artist: "Artist3", songTitle: "Song3" }
+      ],
+      isEdit: false
+    };
+
+  }
+
+
+
+  
+
   render() {
+
+    
+
+    // --- Functions ---
+    //Open Playlist Editor
+    const editModeEnable = () =>{
+      this.setState({isEdit: true});
+    }
+    const editModeClose = () =>{
+      this.setState({isEdit: false});
+    }
+
+
     return (
       <div className="App">
         <MyNav user_name="user"/>
         <Container className="content">
           <Row>
             <Col md="4" sm="12">
-              <DisplayBarContainer title="Playlist Created" data={SongArray} />            
+              <DisplayBarContainer title="Playlist Created" data={this.state.PlaylistSongs} button="Edit" buttonDisabled={this.state.isEdit} click={() => editModeEnable()} />            
             </Col>
-            <Col md="8" sm="12">
-              <DisplayBarContainer title="Edit" data={SongArray}  button="Edit"/>              
-            </Col>
+          { this.state.isEdit ? (
             <Col xs="12">
-              <DisplayBarContainer title="Change Song" data={SongArray} color="#0074bc"/>              
+              <DisplayBarContainer title="Change Song" data={SongArray} color="#0074bc" button="Close" click={() => editModeClose()} />              
             </Col>
+          ) : (
+            ""
+          )}
+            
+            
+            
           </Row>
         </Container>
+        
       {/** 
         <DisplayBar artist="donnie trumpet" songTitle="Sunday Candy" editable={true} />
         <header className="App-header">
