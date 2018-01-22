@@ -24,10 +24,13 @@ class App extends Component {
         <Container className="content">
           <Row>
             <Col md="4" sm="12">
-              <DisplayBarContainer title="Created" data={SongArray} />            
+              <DisplayBarContainer title="Playlist Created" data={SongArray} />            
             </Col>
             <Col md="8" sm="12">
-              <DisplayBarContainer title="Created" data={SongArray}/>              
+              <DisplayBarContainer title="Edit" data={SongArray}  button="Edit"/>              
+            </Col>
+            <Col xs="12">
+              <DisplayBarContainer title="Change Song" data={SongArray} color="#0074bc"/>              
             </Col>
           </Row>
         </Container>

@@ -44,13 +44,23 @@
 
 /* Display Bar */
 .DisplaybarContainer{
-  background-color: white;
-  width: 100%;
+  /* width: 100%;
   margin-top: 20px; 
 
   border: solid rgb(70, 70, 70) 2px;
-  border-radius: 5px;
+  border-radius: 5px; */
 }
+
+.DisplaybarContainer-title{
+  /* color: rgb(150, 150, 150); */
+  /* #0074bc */
+  /* background-color: rgb(70, 70, 70); */
+}
+
+.DisplaybarContainer-footer{
+  height: 20px;
+}
+
 
 .Displaybar{
   display: flex;
@@ -80,4 +90,8 @@
 .Displaybar-artist{
   /* background-color: grey; */
   align-self: flex-end;
+}
+
+.Displaybar-button{
+
 }
