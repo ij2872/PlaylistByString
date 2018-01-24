@@ -6,7 +6,7 @@ import {Container, Row, Col} from 'reactstrap';
 
 import MyNav from './components/MyNav';
 import DisplayBarContainer from './components/DisplayBarContainer';
-
+import MusicService from './MusicService';
 
 // DEBUG
 
@@ -21,14 +21,23 @@ class App extends Component {
   constructor(props){
     super(props);
 
+
+
+
+    // MusicService.log();
+    let service = new MusicService();
+    service.log("TEST");
+    service.printPlaylist();
+    console.log(" ");
+    service.addSong("song1212521", "artist1258521");
+    service.printPlaylist();
+    
+
     this.state = {
-      PlaylistSongs: [
-        { id: 0, artist: "Artist", songTitle: "Song" },
-        { id: 1, artist: "Artist2", songTitle: "Song2" },
-        { id: 2, artist: "Artist3", songTitle: "Song3" }
-      ],
+      PlaylistSongs: service.getPlaylist(),
       isEdit: false
     };
+
 
   }
 

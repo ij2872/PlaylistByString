@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import DisplayBar from './DisplayBar';
 import { 
-        Button,
-        Row,
-        Col } from 'reactstrap';
+        Button} from 'reactstrap';
 
 
 

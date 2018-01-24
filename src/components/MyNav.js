@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
+// import { Button } from 'reactstrap';
 import {
   Collapse,
   Navbar,
@@ -7,11 +7,7 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  NavLink
 } from 'reactstrap';
 
 class MyNav extends Component {
@@ -33,7 +29,7 @@ class MyNav extends Component {
   render() {
     return (
       <div className="navigation" >
-      <Navbar color="dark" inverse expand="md" className="navbar-dark">
+      <Navbar color="dark"  expand="md" className="navbar-dark">
         <NavbarBrand diabled href="/">{this.props.user_name}</NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
