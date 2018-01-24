@@ -75,13 +75,20 @@ class MusicService {
         this.playlist.push(obj);
     }
 
+    // O(n) time complexity
+    // @TODO Change algorithim for faster removal
     removeSong(id){
-        this.playlist.forEach(e => {
-            console.log(e);
+        this.playlist.forEach((e, i) => {
+
+            //Current object.id === id
+            if(e.id === id){
+                console.log(`Removing ${e.id}|${e.songTitle}`);
+                this.playlist.splice(i, 1);
+                return;
+            }
+            
         });
     }
-
-
 }
 
 

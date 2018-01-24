@@ -29,6 +29,8 @@ class App extends Component {
     service.log("TEST");
     service.printPlaylist();
     console.log(" ");
+    service.removeSong(1);
+    service.removeSong(2);
     service.addSong("song1212521", "artist1258521");
     service.printPlaylist();
     
