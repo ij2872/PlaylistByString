@@ -26,12 +26,16 @@ class App extends Component {
 
     // MusicService.log();
     let service = new MusicService();
-    service.log("TEST");
-    service.printPlaylist();
-    console.log(" ");
-    service.removeSong(1);
-    service.removeSong(2);
-    service.addSong("song1212521", "artist1258521");
+
+
+    //DEBUG/TEST
+    // service.log("TEST");
+    // service.printPlaylist();
+    // console.log(" ");
+    // service.removeSong(1);
+    // service.removeSong(2);
+    // service.addSong("song1212521", "artist1258521");
+    // service.changeSong(3, "test");
     service.printPlaylist();
     
 
@@ -67,7 +71,11 @@ class App extends Component {
         <Container className="content">
           <Row>
             <Col md="4" sm="12">
-              <DisplayBarContainer title="Playlist Created" data={this.state.PlaylistSongs} button="Edit" buttonDisabled={this.state.isEdit} click={() => editModeEnable()} />            
+              <DisplayBarContainer 
+                title="Playlist Created" data={this.state.PlaylistSongs} 
+                button="Edit" buttonDisabled={this.state.isEdit} 
+                click={() => editModeEnable()} 
+              />            
             </Col>
           { this.state.isEdit ? (
             <Col xs="12">

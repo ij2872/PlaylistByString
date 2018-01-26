@@ -1,7 +1,7 @@
 
-// MusicService
+// MusicService Class
 // 
-// Functions
+// ------(Class Functions)------
 //
 //  log(str)
 //      - str = {String}
@@ -11,22 +11,32 @@
 //      - song = {String}
 //  removeSong(id)
 //      - id = {int}
-class MusicService {
+//
+//  changeSong(id, newSongObj)
+//      - id = {int}
+//      - newSongObj = { id: {int}, artist: {string}, songTitle: {string} }
+//             
+//  ------(Private Functions)------
+//  
+//  log(e)             
+//      - e = element to console.log()
+//
+//  createSongObject(songObjectId, songObjectArtist, songObjectSong)
+//      songObjectId        = {int}
+//      songObjectArtist    = {string}
+//      songObjectSong      = {string}
+//      returns { id: songObjectId, artist: songObjectArtist, songTitle: songObjectSong }
 
-    // PlaylistSongs: [
-    //     { id: 0, artist: "Artist", songTitle: "Song" },
-    //     { id: 1, artist: "Artist2", songTitle: "Song2" },
-    //     { id: 2, artist: "Artist3", songTitle: "Song3" }
-    //   ]
-    // Music List
-    
+class MusicService {
 
     constructor(){
          this.playlist = [
-            { id: 0, artist: "Artist", songTitle: "Song" },
-            { id: 1, artist: "Artist2", songTitle: "Song2" },
-            { id: 2, artist: "Artist3", songTitle: "Song3" },
-            { id: 3, artist: "Artist4", songTitle: "Song4" }      
+            createSongObject(0, "Unknown", "Untitled"),
+            createSongObject(1, "Unknown", "Untitled"),
+            createSongObject(2, "Unknown", "Untitled"),
+            createSongObject(3, "Unknown", "Untitled"),
+            createSongObject(4, "Unknown", "Untitled"),
+            createSongObject(5, "Unknown", "Untitled")
         ];
     }
 
@@ -89,7 +99,33 @@ class MusicService {
             
         });
     }
+
+    //id = id of song to change
+    //new object of song to change to
+    changeSong(id, newSongObj){
+        let nso = createSongObject(539, "an edit artist", "edit song + obj created");
+
+        let indexOfOld = this.playlist.map(e => e.id).indexOf(id);
+        this.playlist[indexOfOld] = nso;
+        console.log("Song Changed!");
+
+    }
 }
+
+
+//"Private Functions"
+// let log = (e) => {
+//     console.log(e);
+// }
+
+
+function createSongObject(songObjectId, songObjectArtist, songObjectSong){
+    return {
+        id: songObjectId, 
+        artist: songObjectArtist, 
+        songTitle: songObjectSong };
+}
+
 
 
 
