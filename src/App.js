@@ -41,7 +41,8 @@ class App extends Component {
 
     this.state = {
       PlaylistSongs: service.getPlaylist(),
-      isEdit: false
+      isEdit: false,
+      focusId: 1
     };
 
 
@@ -70,15 +71,21 @@ class App extends Component {
         <MyNav user_name="user"/>
         <Container className="content">
           <Row>
+          {/* Search Bar */}
+            <Col xs="12">
+              <div></div>
+            </Col>
+
             <Col md="4" sm="12">
               <DisplayBarContainer 
                 title="Playlist Created" data={this.state.PlaylistSongs} 
-                button="Edit" buttonDisabled={this.state.isEdit} 
+                button="Edit" buttonDisabled={this.state.isEdit}
+                isEdit={this.state.isEdit} 
                 click={() => editModeEnable()} 
               />            
             </Col>
           { this.state.isEdit ? (
-            <Col xs="12">
+            <Col md="8" sm="12">
               <DisplayBarContainer title="Change Song" data={SongArray} color="#0074bc" button="Close" click={() => editModeClose()} />              
             </Col>
           ) : (
@@ -90,16 +97,7 @@ class App extends Component {
           </Row>
         </Container>
         
-      {/** 
-        <DisplayBar artist="donnie trumpet" songTitle="Sunday Candy" editable={true} />
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      */}
+
       </div>
     );
   }

@@ -79,6 +79,7 @@
   flex-direction: column;
 
 }
+
 .Displaybar-close{
   font-size: 10px;
   align-self: flex-end;
@@ -92,6 +93,10 @@
 .Displaybar-artist{
   /* background-color: grey; */
   align-self: flex-end;
+}
+
+.focus{
+  background-color: rgb(54, 95, 61);
 }
 
 .Displaybar-button{

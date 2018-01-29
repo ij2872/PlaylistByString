@@ -2,24 +2,35 @@ import React, { Component } from 'react';
 
 
 
-const DBStyle = {
-    displaybar: {
-        backgroundColor: "#222"
-    },
-    title: {
+// const DBStyle = {
+//     displaybar: {
+//         backgroundColor: "#222"
+//     },
+//     title: {
 
-    },
-    artist: {
+//     },
+//     artist: {
 
-    }
-};
+//     }
+// };
 
 // <Displaybar artist songTitle editable/>
 //      artist     =   {String}
 //      songTitle  =   {String}
 //      editable   =   {true|false}
 //  
-
+// ----- Functions -----
+//  
+//  focus()
+//     - Changes background color of div only if current div === this.props.focusId
+//
+//
+// ----- Parent inher. Functions -----
+//  this.props.click(id)
+//      - Logs id
+//
+//  this.props.changeStyles(obj)
+//
 //@TODO 
 //  -Add Glyphicons for Edit icon 
 //  -Adjust Width
@@ -27,16 +38,51 @@ class DisplayBar extends Component {
 
     constructor(props){
         super(props);
+        this.state = {
+            DBStyle: {
+                displaybar: {
+                    backgroundColor: "#222"
+                },
+                title: {
+            
+                },
+                artist: {
+            
+                }
+            }
+        };
+
+        this.handleClick = this.handleClick.bind(this);
+        this.focus = this.focus.bind(this);
     }
 
-    logPress(){
-        console.log(`Div ${this.props.id} is being pressed.`);
+    focus(){
+        // Change Background color of selected element
+        // this.state.DBStyle.displaybar.backgroundColor = "red";
+        let dbstyle = this.state.DBStyle;
+        
+        // console.log(`props.id: ${this.props.id}     focusId: ${this.props.focusId}`);
+
+
+        this.setState({
+            DBStyle: dbstyle
+        });
     }
+    
+    handleClick(){
+        this.props.changeFocus(this.props.id);
+    }
+
+
 
     render() {
 
         return (
-            <div className="Displaybar" style={DBStyle.displaybar} onClick={() => this.logPress() }>
+            <div
+                className={this.props.isFocus ? "Displaybar focus" : "Displaybar"}
+                onClick={this.handleClick} >
+                
+
                 <div className="Displaybar-close">
                     {this.props.editable === true ? 'Edit' : '' }
                 </div>
