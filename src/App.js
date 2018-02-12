@@ -14,11 +14,6 @@ class App extends Component {
 
   constructor(props){
     super(props);
-
-
-
-
-    // MusicService.log();
     let service = new MusicService();
 
 
@@ -47,27 +42,33 @@ class App extends Component {
       PlaylistSongs: service.getPlaylist(),
       FullPlaylist : service.getSubPlaylist(2), 
       isEdit: false,
-      focusId: 1
+      focusId: 1,
+      service: service
     };
+    
 
+    // Binding
+    this.playlistSongSelector = this.playlistSongSelector.bind(this);
   }
 
 
+  // Gets the currently selected song from the user created playlist (this.state.PlaylistSongs)
+  playlistSongSelector(songId){
+    console.log(`playlistSongSelecter: songId = ${songId}`);
 
-  
+    // Change the playlist focus of the change song container
+    let s = this.state.service.getSubPlaylistById(songId);
+
+    this.setState({FullPlaylist: s});
+    
+  }
 
   render() {
 
     
 
     // --- Functions ---
-    //Open Playlist Editor
-    const editModeEnable = () =>{
-      this.setState({isEdit: true});
-    }
-    const editModeClose = () =>{
-      this.setState({isEdit: false});
-    }
+    
 
 
     return (
@@ -75,27 +76,22 @@ class App extends Component {
         <MyNav user_name="user"/>
         <Container className="content">
           <Row>
-          {/* Search Bar */}
+            {/* Search Bar */}
             <Col xs="12">
               <div></div>
             </Col>
 
+            {/* Song List Container */}
             <Col md="4" sm="12">
               <DisplayBarContainer 
-                title="Playlist Created" data={this.state.PlaylistSongs} 
-                button="Edit" buttonDisabled={this.state.isEdit}
-                isEdit={this.state.isEdit} 
-                click={() => editModeEnable()} 
+                title="Playlist Created" data={this.state.PlaylistSongs} songSelect={this.playlistSongSelector}
               />            
             </Col>
-            
-          { this.state.isEdit ? (
+
+            {/* Edit Song List Container */}  
             <Col md="8" sm="12">
-              <DisplayBarContainer title="Change Song" data={this.state.FullPlaylist} color="#0074bc" keyModifier={24} />              
+              <DisplayBarContainer title="Change Song" data={this.state.FullPlaylist} color="#0074bc" />              
             </Col>
-          ) : (
-            ""
-          )}
             
             
             

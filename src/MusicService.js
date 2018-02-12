@@ -69,8 +69,28 @@ class MusicService {
     
     getSubPlaylist(row){
         // console.log("Getting Subplaylist: " + row);
-        // console.log(this.fullPlaylist[row]);
+        console.log(this.fullPlaylist[row]);
         return this.fullPlaylist[row];
+    }
+
+    getSubPlaylistById(songId){
+        // Looks through fullplaylist array for the selected song Id
+        // console.log("Checking Full playlist");
+
+        let locationIndexFound = -1;
+        this.fullPlaylist.forEach((playlist, index) => {
+
+            playlist.forEach(elem => { 
+                // console.log(`contains() elem: ${elem.id}`);
+                if(elem.id == songId){
+                    // console.log(`getSubPlaylistById() playlist found at [${index}]`);
+                    
+                    locationIndexFound = index;
+                }
+            });
+        });
+
+        return this.fullPlaylist[locationIndexFound];
     }
 
     //---full playlist

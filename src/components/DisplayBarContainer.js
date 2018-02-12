@@ -39,11 +39,12 @@ const DBStyle = {
 //  -
 // <DisplayBarContainer 
 //      title               = {String} Title of containers header
-//      button              = {String} String inside button  
-//      buttonDisabled      = {Boolean} 
-//      isEdit              = {Boolean} Status of edit mode
-//      click               = {function} => editModeEnable() 
+//      color               = {String} Hex value of color requested
 //
+//      ---[Functions]---
+//      click()             = {function} => Parent.editModeEnable() 
+//      songSelect(songId)  = {function} => Parent.playlistSongSelector(songId)
+//  
 //      data                =     {
 //                                  artist:       {String},
 //                                  songTitle:    {String},
@@ -56,7 +57,7 @@ class DisplayBarContainer extends Component {
     constructor(props){
         super(props);
         this.state = {
-            focusId: -1
+            focusId: 1
         };
 
         // this.props.isEdit ? this.setState({focusId: 0}) : this.setState({focusId: -1})        
@@ -66,13 +67,11 @@ class DisplayBarContainer extends Component {
     changeFocus(id){
         // console.log(`getClickedId(${id}) Pressed.`);
 
-        //if in edit mode and div is selected
-        if(this.props.isEdit){
-            //set default div to edit
-            this.setState({focusId: id});
-        } else{
-            this.setState({focusId: 0});            
-        }
+        //set default div to edit
+        this.setState({focusId: id});
+        
+        //Pass selected songId to App.js
+        this.props.songSelect(id);
     }
 
 
@@ -83,6 +82,7 @@ class DisplayBarContainer extends Component {
                 <div className="DisplaybarContainer-title" style={DBStyle.title}>{this.props.title}</div>
 
                 {                       
+                    
                     /* RENDER Display Bars for each songs in this.state.data */
                     this.props.data.map((d, i) => {
                         let isFocus = false;
@@ -102,12 +102,6 @@ class DisplayBarContainer extends Component {
 
                 <div className ="DisplaybarContainer-footer" style={DBStyle.footer}>
                 {
-                    //if button is requested
-                    this.props.button 
-                    ?   <Button className={"Displaybar-button " + (this.props.buttonDisabled === true ? 'disabled' : ' ')} size="sm" color={DBStyle.button.color} onClick={this.props.click}>
-                            {this.props.button}
-                        </Button>
-                    : ""
                 }
                 </div>
                 
