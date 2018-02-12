@@ -37,14 +37,20 @@ const DBStyle = {
 //@TODO
 //  -
 //  -
-// <DisplayBarContainer DisplayBar />
-//      data      =     {
-//                            artist:       {String},
-//                            songTitle:    {String},
-//                            color:        {String}(true|false),
-//                            button:       {String}(true|false)
-//                      }       
-//  
+// <DisplayBarContainer 
+//      title               = {String} Title of containers header
+//      button              = {String} String inside button  
+//      buttonDisabled      = {Boolean} 
+//      isEdit              = {Boolean} Status of edit mode
+//      click               = {function} => editModeEnable() 
+//
+//      data                =     {
+//                                  artist:       {String},
+//                                  songTitle:    {String},
+//                                  color:        {String}(true|false),
+//                                  button:       {String}(true|false)
+//                                }       
+// /> 
 class DisplayBarContainer extends Component {
     
     constructor(props){
@@ -53,12 +59,12 @@ class DisplayBarContainer extends Component {
             focusId: -1
         };
 
-        this.props.isEdit ? this.setState({focusId: 0}) : this.setState({focusId: -1})        
+        // this.props.isEdit ? this.setState({focusId: 0}) : this.setState({focusId: -1})        
         this.changeFocus   = this.changeFocus.bind(this);
     }
 
     changeFocus(id){
-        console.log(`getClickedId(${id}) Pressed.`);
+        // console.log(`getClickedId(${id}) Pressed.`);
 
         //if in edit mode and div is selected
         if(this.props.isEdit){
@@ -84,11 +90,13 @@ class DisplayBarContainer extends Component {
                             // console.log(`d.id: ${d.id}  this.state.focusId: ${this.state.focusId}`);
                             isFocus = true;
                         }
-                        console.log(isFocus);
-                        return <DisplayBar key={d.artist + i} id={d.id} artist={d.artist} 
+
+                        // console.log("Displaybar: " + d.artist);
+                        return d.artist ? <DisplayBar key={d.id} id={d.id} artist={d.artist} 
                             songTitle={d.songTitle} focusId={ this.state.focusId} 
                             changeFocus={this.changeFocus} changeStyles={this.changeStyles}
-                            isFocus={isFocus}/>;
+                            isFocus={isFocus}/>
+                            : "" ;
                     }, this)
                 }
 

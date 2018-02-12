@@ -8,12 +8,6 @@ import MyNav from './components/MyNav';
 import DisplayBarContainer from './components/DisplayBarContainer';
 import MusicService from './MusicService';
 
-// DEBUG
-
-//TEST ARTIST ARRAY
-const SongArray = [];
-SongArray.push({artist: "Donnie", songTitle: "SundayCandy"});
-SongArray.push({artist: "Artist", songTitle: "Song"});
 
 
 class App extends Component {
@@ -28,6 +22,16 @@ class App extends Component {
     let service = new MusicService();
 
 
+    // ---------------------------
+    // |    SERVICE TESTING       |
+    service.renderTrackResults();
+
+    // service.printFullPlaylist(0);
+    
+
+    // |    SERVICE TESTING END   |
+    // ----------------------------
+
     //DEBUG/TEST
     // service.log("TEST");
     // service.printPlaylist();
@@ -36,15 +40,15 @@ class App extends Component {
     // service.removeSong(2);
     // service.addSong("song1212521", "artist1258521");
     // service.changeSong(3, "test");
-    service.printPlaylist();
+    // service.printPlaylist();
     
 
     this.state = {
       PlaylistSongs: service.getPlaylist(),
+      FullPlaylist : service.getSubPlaylist(2), 
       isEdit: false,
       focusId: 1
     };
-
 
   }
 
@@ -84,9 +88,10 @@ class App extends Component {
                 click={() => editModeEnable()} 
               />            
             </Col>
+            
           { this.state.isEdit ? (
             <Col md="8" sm="12">
-              <DisplayBarContainer title="Change Song" data={SongArray} color="#0074bc" button="Close" click={() => editModeClose()} />              
+              <DisplayBarContainer title="Change Song" data={this.state.FullPlaylist} color="#0074bc" keyModifier={24} />              
             </Col>
           ) : (
             ""

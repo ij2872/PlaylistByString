@@ -1,3 +1,8 @@
+import search1 from './data/spotifyArtistSearch_never';
+import search2 from './data/spotifyArtistSearch_gonna';
+import search3 from './data/spotifyArtistSearch_give';
+import search4 from './data/spotifyArtistSearch_you';
+import search5 from './data/spotifyArtistSearch_up';
 
 // MusicService Class
 // 
@@ -30,14 +35,26 @@
 class MusicService {
 
     constructor(){
-         this.playlist = [
-            createSongObject(0, "Unknown", "Untitled"),
-            createSongObject(1, "Unknown", "Untitled"),
-            createSongObject(2, "Unknown", "Untitled"),
-            createSongObject(3, "Unknown", "Untitled"),
-            createSongObject(4, "Unknown", "Untitled"),
-            createSongObject(5, "Unknown", "Untitled")
-        ];
+        this.playlist = [];
+
+        this.fullPlaylist = [];
+        
+                            
+        // this.printFullPlaylist();
+
+
+
+        // this.fp_fpToPlaylist();
+        // this.fullPlaylist.forEach(pl => {
+        //     //Append first element of fullPlaylist to main playlist
+        //     console.log("Appending first element of fullPlaylist array to playlist");
+        //     console.log(this.fullPlaylist[0]);
+        //     this.playlist.push(this.fullPlaylist[0]);
+
+        // });
+
+
+
     }
 
     log(str){
@@ -45,14 +62,34 @@ class MusicService {
         console.log(this.playlist);
     }
 
+    //---playlist
     getPlaylist(){
         return this.playlist;
     }
+    
+    getSubPlaylist(row){
+        // console.log("Getting Subplaylist: " + row);
+        // console.log(this.fullPlaylist[row]);
+        return this.fullPlaylist[row];
+    }
 
-    printPlaylist(){
-        console.log();        
+    //---full playlist
+    getFullPlaylist(){
+        return this.fullPlaylist;
+    }
+
+
+    printPlaylist(){      
         this.playlist.forEach(e => {
             console.log(`id: ${e.id} song: ${e.artist} title: ${e.songTitle}`);
+        });
+    }
+
+
+    printFullPlaylist(row){
+        // console.log(`Printing fullplaylist[${row}]`);
+        this.fullPlaylist.forEach(e => {
+            console.log(e);
         });
     }
 
@@ -92,7 +129,7 @@ class MusicService {
 
             //Current object.id === id
             if(e.id === id){
-                console.log(`Removing ${e.id}|${e.songTitle}`);
+                // console.log(`Removing ${e.id}|${e.songTitle}`);
                 this.playlist.splice(i, 1);
                 return;
             }
@@ -110,7 +147,78 @@ class MusicService {
         console.log("Song Changed!");
 
     }
+
+    // ---------------------------
+    //  Full Playlist Functions
+    // ---------------------------
+    
+    // Add song array to the Full playlist [][]
+    // 
+    //  arr  = [{songObject}, {songObject}, {songObject}]
+    //
+
+    fp_add(arr){
+        this.fullPlaylist.push(arr);
+    }
+
+    fp_renderPlaylist(){
+        this.fullPlaylist.forEach((pl, i) => {
+            //Append first element of fullPlaylist to main playlist
+            // console.log("Appending first element of fullPlaylist array to playlist");
+            // console.log(this.fullPlaylist[i][0]);
+            //
+            this.playlist.push(this.fullPlaylist[i][0]);
+
+        });
+    }
+
+// ---------------------------
+//  Spotify API Functions
+// ---------------------------
+// @TODO Move Spotify api functions to a class
+
+
+    //renderTrackResults()
+    //  - Renders from Spotify Api json
+    renderTrackResults(){
+
+        
+        // Render Full playlist
+        // console.log("SpotifyAPI printTrackResult() ");
+
+        this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search1)));
+        this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search2)));
+        this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search3)));
+        this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search4)));
+        this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search5)));
+
+
+
+        //  Render main playlist
+        this.fullPlaylist.forEach(pl => {
+
+            
+            //Append first element of fullPlaylist to main playlist
+            this.playlist.push(this.fullPlaylist[0])
+            
+        });
+        
+        // this.printFullPlaylist(0);
+        this.fp_renderPlaylist();
+
+    }
+
+    
+
+
+    // ---------------------------
+
+
 }
+
+
+
+
 
 
 //"Private Functions"
@@ -123,9 +231,34 @@ function createSongObject(songObjectId, songObjectArtist, songObjectSong){
     return {
         id: songObjectId, 
         artist: songObjectArtist, 
-        songTitle: songObjectSong };
+        songTitle: songObjectSong 
+    };
 }
 
+// Returns array of song objects
+function createSongObjectFromArray(arr){
+    let songObjectArrayResult = [];
+
+    arr.forEach((object, i) => {
+        // console.log("artist: " + object.artists[0].name)
+
+        let songObject = createSongObject(object.id, object.artists[0].name, object.name);
+        songObjectArrayResult.push(songObject);
+    });
+
+
+    return songObjectArrayResult;
+}
+
+
+
+// Private Spotify Functions
+
+function Spotift_JsonToSongObject(jsonSearchObject){
+    // console.log("Spotift_JsonToSongObject: ");
+    // console.log(jsonSearchObject.tracks.items);
+    return jsonSearchObject.tracks.items;
+}
 
 
 
