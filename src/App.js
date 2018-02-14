@@ -49,6 +49,7 @@ class App extends Component {
 
     // Binding
     this.playlistSongSelector = this.playlistSongSelector.bind(this);
+    this.playlistEditSelector = this.playlistEditSelector.bind(this);
   }
 
 
@@ -57,11 +58,18 @@ class App extends Component {
     console.log(`playlistSongSelecter: songId = ${songId}`);
 
     // Change the playlist focus of the change song container
-    let s = this.state.service.getSubPlaylistById(songId);
+    let subPlaylist = this.state.service.getSubPlaylistById(songId);
 
-    this.setState({FullPlaylist: s});
+    this.setState({FullPlaylist: subPlaylist});
     
   }
+
+
+  //Changed the focus of the edit song playlist
+  playlistEditSelector(songId){
+
+  }
+
 
   render() {
 
@@ -84,13 +92,12 @@ class App extends Component {
             {/* Song List Container */}
             <Col md="4" sm="12">
               <DisplayBarContainer 
-                title="Playlist Created" data={this.state.PlaylistSongs} songSelect={this.playlistSongSelector}
-              />            
+                title="Playlist Created" data={this.state.PlaylistSongs} songSelect={this.playlistSongSelector}/>            
             </Col>
 
             {/* Edit Song List Container */}  
             <Col md="8" sm="12">
-              <DisplayBarContainer title="Change Song" data={this.state.FullPlaylist} color="#0074bc" />              
+              <DisplayBarContainer title="Change Song" data={this.state.FullPlaylist} color="#0074bc" songSelect={this.playlistEditSelector}/>              
             </Col>
             
             

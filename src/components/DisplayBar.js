@@ -78,15 +78,13 @@ class DisplayBar extends Component {
     render() {
 
         return (
-            <div
-                className={this.props.isFocus ? "Displaybar focus" : "Displaybar"}
-                onClick={this.handleClick} >
+            <div className={this.props.isFocus ? "Displaybar focus" : "Displaybar"}
+                 onClick={this.handleClick} >
                 
 
-                <div className="Displaybar-close">
-                    {this.props.editable === true ? 'Edit' : '' }
-                </div>
+                
                 <div>{this.props.id}</div>
+                <div>{this.props.divId}</div>
                 <div className="Displaybar-title">
                     {this.props.songTitle} 
                 </div>

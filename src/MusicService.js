@@ -36,25 +36,7 @@ class MusicService {
 
     constructor(){
         this.playlist = [];
-
         this.fullPlaylist = [];
-        
-                            
-        // this.printFullPlaylist();
-
-
-
-        // this.fp_fpToPlaylist();
-        // this.fullPlaylist.forEach(pl => {
-        //     //Append first element of fullPlaylist to main playlist
-        //     console.log("Appending first element of fullPlaylist array to playlist");
-        //     console.log(this.fullPlaylist[0]);
-        //     this.playlist.push(this.fullPlaylist[0]);
-
-        // });
-
-
-
     }
 
     log(str){
@@ -69,7 +51,7 @@ class MusicService {
     
     getSubPlaylist(row){
         // console.log("Getting Subplaylist: " + row);
-        console.log(this.fullPlaylist[row]);
+        // console.log(this.fullPlaylist[row]);
         return this.fullPlaylist[row];
     }
 
@@ -82,11 +64,12 @@ class MusicService {
 
             playlist.forEach(elem => { 
                 // console.log(`contains() elem: ${elem.id}`);
-                if(elem.id == songId){
+                if(elem.id === songId){
                     // console.log(`getSubPlaylistById() playlist found at [${index}]`);
                     
                     locationIndexFound = index;
                 }
+
             });
         });
 

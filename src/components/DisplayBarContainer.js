@@ -60,12 +60,13 @@ class DisplayBarContainer extends Component {
             focusId: 1
         };
 
+        console.log("First song ID : " + this.state.focusId);
         // this.props.isEdit ? this.setState({focusId: 0}) : this.setState({focusId: -1})        
         this.changeFocus   = this.changeFocus.bind(this);
     }
 
     changeFocus(id){
-        // console.log(`getClickedId(${id}) Pressed.`);
+        console.log(`getClickedId(${id}) Pressed.`);
 
         //set default div to edit
         this.setState({focusId: id});
@@ -82,21 +83,22 @@ class DisplayBarContainer extends Component {
                 <div className="DisplaybarContainer-title" style={DBStyle.title}>{this.props.title}</div>
 
                 {                       
-                    
+
                     /* RENDER Display Bars for each songs in this.state.data */
                     this.props.data.map((d, i) => {
-                        let isFocus = false;
-                        if(d.id === this.state.focusId){
-                            // console.log(`d.id: ${d.id}  this.state.focusId: ${this.state.focusId}`);
-                            isFocus = true;
-                        }
-
+                        let isFocus = i === 0 ? true : false;
+                        
+                        
                         // console.log("Displaybar: " + d.artist);
-                        return d.artist ? <DisplayBar key={d.id} id={d.id} artist={d.artist} 
-                            songTitle={d.songTitle} focusId={ this.state.focusId} 
-                            changeFocus={this.changeFocus} changeStyles={this.changeStyles}
+                        // return d.artist ? <DisplayBar key={d.id} id={d.id} divId={i} artist={d.artist} 
+                        //     songTitle={d.songTitle} focusId={this.state.focusId} 
+                        //     changeFocus={this.changeFocus}
+                        //     isFocus={isFocus}/>
+                        //     : "" ;
+                            return <DisplayBar key={d.id} id={d.id} divId={i} artist={d.artist} 
+                            songTitle={d.songTitle} focusId={this.state.focusId} 
+                            changeFocus={this.changeFocus}
                             isFocus={isFocus}/>
-                            : "" ;
                     }, this)
                 }
 
