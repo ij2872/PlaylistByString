@@ -197,14 +197,6 @@ class MusicService {
 
 
 
-        //  Render main playlist
-        this.fullPlaylist.forEach(pl => {
-
-            
-            //Append first element of fullPlaylist to main playlist
-            this.playlist.push(this.fullPlaylist[0])
-            
-        });
         
         // this.printFullPlaylist(0);
         this.fp_renderPlaylist();
