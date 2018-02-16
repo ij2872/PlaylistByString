@@ -70,7 +70,8 @@ class DisplayBar extends Component {
     }
     
     handleClick(){
-        this.props.changeFocus(this.props.id);
+        this.props.changeFocus(this.props.divId, this.props.id);
+        // console.log("<DisplayBar>: handleClick() => id = " + this.props.divId);
     }
 
 

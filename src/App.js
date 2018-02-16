@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import './resc/bootstrap.min.css';
-import {Container, Row, Col} from 'reactstrap';
+import {Container, Row, Col, Input, Button, Form, FormGroup, Label, InputGroup, InputGroupAddon} from 'reactstrap';
 
 import MyNav from './components/MyNav';
 import DisplayBarContainer from './components/DisplayBarContainer';
@@ -42,7 +42,8 @@ class App extends Component {
       PlaylistSongs: service.getPlaylist(),
       FullPlaylist : service.getSubPlaylist(2), 
       isEdit: false,
-      focusId: 1,
+      focusIdMain: 0,
+      focusIdEdit: 0,
       service: service
     };
     
@@ -50,18 +51,21 @@ class App extends Component {
     // Binding
     this.playlistSongSelector = this.playlistSongSelector.bind(this);
     this.playlistEditSelector = this.playlistEditSelector.bind(this);
+
   }
+
+
 
 
   // Gets the currently selected song from the user created playlist (this.state.PlaylistSongs)
   playlistSongSelector(songId){
-    console.log(`playlistSongSelecter: songId = ${songId}`);
+    // console.log(`playlistSongSelecter: songId = ${songId}`);
 
     // Change the playlist focus of the change song container
     let subPlaylist = this.state.service.getSubPlaylistById(songId);
 
+    // console.log(`App.playlistSongSelector(${songId}) subPlaylist = ${subPlaylist}`);
     this.setState({FullPlaylist: subPlaylist});
-    
   }
 
 
@@ -82,22 +86,33 @@ class App extends Component {
     return (
       <div className="App">
         <MyNav user_name="user"/>
+        
         <Container className="content">
           <Row>
             {/* Search Bar */}
             <Col xs="12">
-              <div></div>
+              <Form>
+                <FormGroup row>
+                  <InputGroup>
+                    <InputGroupAddon addonType="prepend">Enter String</InputGroupAddon>                  
+                    <Input id="user-search"/>
+                    <InputGroupAddon addonType="append">
+                      <Button color="success">Create!</Button>
+                    </InputGroupAddon>
+                  </InputGroup>               
+                </FormGroup>
+              </Form>
             </Col>
 
             {/* Song List Container */}
             <Col md="4" sm="12">
               <DisplayBarContainer 
-                title="Playlist Created" data={this.state.PlaylistSongs} songSelect={this.playlistSongSelector}/>            
+                title="Playlist Created" data={this.state.PlaylistSongs} songSelect={this.playlistSongSelector} divId={this.state.focusIdMain}/>            
             </Col>
 
             {/* Edit Song List Container */}  
             <Col md="8" sm="12">
-              <DisplayBarContainer title="Change Song" data={this.state.FullPlaylist} color="#0074bc" songSelect={this.playlistEditSelector}/>              
+              <DisplayBarContainer title="Change Song" data={this.state.FullPlaylist} color="#0074bc" songSelect={this.playlistEditSelector} divId={this.state.focusIdEdit}/>              
             </Col>
             
             
