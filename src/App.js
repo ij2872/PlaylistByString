@@ -27,7 +27,10 @@ class App extends Component {
     // |    SERVICE TESTING END   |
     // ----------------------------
 
-    //DEBUG/TEST
+    // ---------------------------
+    // |    SERVICE DEBUGGING     |
+
+
     // service.log("TEST");
     // service.printPlaylist();
     // console.log(" ");
@@ -38,20 +41,25 @@ class App extends Component {
     // service.printPlaylist();
     
 
+    // |    SERVICE DEBUGGING END   |
+    // ----------------------------
+
     this.state = {
       PlaylistSongs: service.getPlaylist(),
-      FullPlaylist : service.getSubPlaylist(2), 
+      FullPlaylist : service.getSubPlaylist(0), 
       isEdit: false,
       focusIdMain: 0,
       focusIdEdit: 0,
       service: service
     };
     
+    // this.state.service.swapPlaylistIndex(0, 1);
+    // this.setState({PlaylistSongs: service.getPlaylist()});
+
 
     // Binding
     this.playlistSongSelector = this.playlistSongSelector.bind(this);
     this.playlistEditSelector = this.playlistEditSelector.bind(this);
-
   }
 
 
@@ -69,8 +77,10 @@ class App extends Component {
   }
 
 
+  // Render when a user edits the main playlist
+
   //Changed the focus of the edit song playlist
-  playlistEditSelector(songId){
+  playlistEditSelector(editSongId, mainSongId){
 
   }
 
@@ -106,13 +116,24 @@ class App extends Component {
 
             {/* Song List Container */}
             <Col md="4" sm="12">
+              <DisplayBarContainer>
+                
+              </DisplayBarContainer>
+              {/*
               <DisplayBarContainer 
                 title="Playlist Created" data={this.state.PlaylistSongs} songSelect={this.playlistSongSelector} divId={this.state.focusIdMain}/>            
+              */}
+
+
             </Col>
 
             {/* Edit Song List Container */}  
             <Col md="8" sm="12">
-              <DisplayBarContainer title="Change Song" data={this.state.FullPlaylist} color="#0074bc" songSelect={this.playlistEditSelector} divId={this.state.focusIdEdit}/>              
+            {/* WORKING Displaybar.
+              <DisplayBarContainer title="Change Song" data={this.state.FullPlaylist} color="#0074bc" 
+              songSelect={this.playlistEditSelector} editSelect={this.playlistEditSelector}
+              divId={this.state.focusIdEdit}/>  
+            */}            
             </Col>
             
             

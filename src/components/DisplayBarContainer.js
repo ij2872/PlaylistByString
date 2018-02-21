@@ -84,19 +84,18 @@ class DisplayBarContainer extends Component {
             <div className="DisplaybarContainer" style={DBStyle.container}>
                 <div className="DisplaybarContainer-title" style={DBStyle.title}>{this.props.title}</div>
 
-                {                       
+                // {}
+                //     /* RENDER Display Bars for each songs in this.state.data */
+                //     this.props.data.map((d, i) => {
+                //         // console.log(`DisplayBarContainer Render i: ${i}`);
+                //         let isFocus = i === this.state.focusId ? true : false;
 
-                    /* RENDER Display Bars for each songs in this.state.data */
-                    this.props.data.map((d, i) => {
-                        // console.log(`DisplayBarContainer Render i: ${i}`);
-                        let isFocus = i === this.state.focusId ? true : false;
-
-                        return <DisplayBar key={d.id} id={d.id} divId={i} artist={d.artist} 
-                        songTitle={d.songTitle} focusId={this.state.focusId} 
-                        changeFocus={this.changeFocus}
-                        isFocus={isFocus}/>
-                    }, this)
-                }
+                //         return <DisplayBar key={d.id} id={d.id} divId={i} artist={d.artist} 
+                //         songTitle={d.songTitle} focusId={this.state.focusId} 
+                //         changeFocus={this.changeFocus}
+                //         isFocus={isFocus}/>
+                //     }, this)
+                // }
 
                 <div className ="DisplaybarContainer-footer" style={DBStyle.footer}>
                 {

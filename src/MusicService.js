@@ -76,6 +76,10 @@ class MusicService {
         return this.fullPlaylist[locationIndexFound];
     }
 
+    swapPlaylistIndex(mainPlaylistSongId, subPlaylistSongId){
+        this.playlist[mainPlaylistSongId] = this.fullPlaylist[mainPlaylistSongId][subPlaylistSongId];
+    }
+
     //---full playlist
     getFullPlaylist(){
         return this.fullPlaylist;
