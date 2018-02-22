@@ -6,7 +6,9 @@ import {Container, Row, Col, Input, Button, Form, FormGroup, Label, InputGroup, 
 
 import MyNav from './components/MyNav';
 import DisplayBarContainer from './components/DisplayBarContainer';
+import Displaybar from './components/DisplayBar';
 import MusicService from './MusicService';
+import DisplayBar from './components/DisplayBar';
 
 
 
@@ -60,6 +62,8 @@ class App extends Component {
     // Binding
     this.playlistSongSelector = this.playlistSongSelector.bind(this);
     this.playlistEditSelector = this.playlistEditSelector.bind(this);
+    this.changeMainFocus = this.changeMainFocus.bind(this);
+    this.changeEditFocus = this.changeEditFocus.bind(this);
   }
 
 
@@ -67,7 +71,7 @@ class App extends Component {
 
   // Gets the currently selected song from the user created playlist (this.state.PlaylistSongs)
   playlistSongSelector(songId){
-    // console.log(`playlistSongSelecter: songId = ${songId}`);
+    console.log(`app.playlistSongSelecter: songId = ${songId}`);
 
     // Change the playlist focus of the change song container
     let subPlaylist = this.state.service.getSubPlaylistById(songId);
@@ -81,6 +85,22 @@ class App extends Component {
 
   //Changed the focus of the edit song playlist
   playlistEditSelector(editSongId, mainSongId){
+    console.log(`app.playlistEditSelector(${editSongId}, ${mainSongId})`);
+  }
+
+  changeMainFocus(divId, id){
+    console.log(`DisplayBarContainer.getClickedId(${divId}, ${id}) Pressed.`);
+    this.playlistSongSelector(id);
+    //set default div to edit
+    this.setState({focusIdMain: divId});
+
+  }
+  changeEditFocus(divId, id){
+    console.log(`DisplayBarContainer.getClickedId(${divId}, ${id}) Pressed.`);
+
+    //set default div to edit
+    this.setState({focusIdEdit: divId});
+    this.state.service.swapPlaylistIndex(this.state.service.getParentIndexFromSongId(id) , divId);
 
   }
 
@@ -117,26 +137,48 @@ class App extends Component {
             {/* Song List Container */}
             <Col md="4" sm="12">
               <DisplayBarContainer>
-                
-              </DisplayBarContainer>
-              {/*
-              <DisplayBarContainer 
-                title="Playlist Created" data={this.state.PlaylistSongs} songSelect={this.playlistSongSelector} divId={this.state.focusIdMain}/>            
-              */}
+                {
 
+                  this.state.PlaylistSongs.map((songData, i) => {
+                    let isFocus = (i === this.state.focusIdMain ? true : false);
+
+                    let component = (<DisplayBar key={songData.id} 
+                                                id={songData.id}
+                                                divId={i}
+                                                artist={songData.artist}
+                                                songTitle={songData.songTitle}
+                                                focusId={this.state.focusIdMain}
+                                                changeFocus={this.changeMainFocus}
+                                                isFocus={isFocus}/>);
+                    return component;
+                  }, this)
+                }
+              </DisplayBarContainer>
 
             </Col>
 
             {/* Edit Song List Container */}  
             <Col md="8" sm="12">
-            {/* WORKING Displaybar.
-              <DisplayBarContainer title="Change Song" data={this.state.FullPlaylist} color="#0074bc" 
-              songSelect={this.playlistEditSelector} editSelect={this.playlistEditSelector}
-              divId={this.state.focusIdEdit}/>  
-            */}            
+            <DisplayBarContainer>
+                {
+
+                  this.state.FullPlaylist.map((songData, i) => {
+                    let isFocus = (i === this.state.focusIdEdit ? true : false);
+
+                    let component = (<DisplayBar key={songData.id} 
+                                                id={songData.id}
+                                                divId={i}
+                                                artist={songData.artist}
+                                                songTitle={songData.songTitle}
+                                                focusId={this.state.focusIdMain}
+                                                changeFocus={this.changeEditFocus}
+                                                isFocus={isFocus}/>);
+                    return component;
+                  }, this)
+                }
+              </DisplayBarContainer>       
             </Col>
-            
-            
+
             
           </Row>
         </Container>

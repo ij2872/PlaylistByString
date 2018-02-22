@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DisplayBar from './DisplayBar';
+// import DisplayBar from './DisplayBar';
 import { 
         Button
     } from 'reactstrap';
@@ -64,45 +64,39 @@ class DisplayBarContainer extends Component {
 
             
         // this.props.isEdit ? this.setState({focusId: 0}) : this.setState({focusId: -1})        
-        this.changeFocus   = this.changeFocus.bind(this);
+        // this.changeFocus   = this.changeFocus.bind(this);
     }
 
-    changeFocus(divId, id){
-        console.log(`DisplayBarContainer.getClickedId(${divId}, ${id}) Pressed.`);
-
-        //set default div to edit
-        this.setState({focusId: divId});
-        
-        //Pass selected songId to App.js
-        this.props.songSelect(id);
-    }
 
 
     render() {
         return (
-            
-            <div className="DisplaybarContainer" style={DBStyle.container}>
-                <div className="DisplaybarContainer-title" style={DBStyle.title}>{this.props.title}</div>
+            this.props.children
 
-                // {}
-                //     /* RENDER Display Bars for each songs in this.state.data */
-                //     this.props.data.map((d, i) => {
-                //         // console.log(`DisplayBarContainer Render i: ${i}`);
-                //         let isFocus = i === this.state.focusId ? true : false;
 
-                //         return <DisplayBar key={d.id} id={d.id} divId={i} artist={d.artist} 
-                //         songTitle={d.songTitle} focusId={this.state.focusId} 
-                //         changeFocus={this.changeFocus}
-                //         isFocus={isFocus}/>
-                //     }, this)
-                // }
+            // WORKING CODE 
+            // <div className="DisplaybarContainer" style={DBStyle.container}>
+            //     <div className="DisplaybarContainer-title" style={DBStyle.title}>{this.props.title}</div>
 
-                <div className ="DisplaybarContainer-footer" style={DBStyle.footer}>
-                {
-                }
-                </div>
+            //     {
+            //         /* RENDER Display Bars for each songs in this.state.data */
+            //         this.props.data.map((d, i) => {
+            //             // console.log(`DisplayBarContainer Render i: ${i}`);
+            //             let isFocus = i === this.state.focusId ? true : false;
+
+            //             return <DisplayBar key={d.id} id={d.id} divId={i} artist={d.artist} 
+            //             songTitle={d.songTitle} focusId={this.state.focusId} 
+            //             changeFocus={this.changeFocus}
+            //             isFocus={isFocus}/>
+            //         }, this)
+            //     }
+
+            //     <div className ="DisplaybarContainer-footer" style={DBStyle.footer}>
+            //     {
+            //     }
+            //     </div>
                 
-            </div>
+            // </div>
         );
   }
 }

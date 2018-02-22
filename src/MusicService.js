@@ -76,6 +76,33 @@ class MusicService {
         return this.fullPlaylist[locationIndexFound];
     }
 
+    // Returns the location of a song
+    //  Params: 
+    //      songId: hash id of song
+    //      
+    // ex: fullplaylist[i][songinx] returns i;
+    getParentIndexFromSongId(songId){
+        let indexResult = -1;
+
+        this.fullPlaylist.forEach((playlist, index) => {
+
+            playlist.forEach(elem => { 
+                // console.log(`contains() elem: ${elem.id}`);
+                if(elem.id === songId){
+                    console.log(`MusicService.getParentIndexFromSongId(${songId}) index found at [${index}]`);
+                    
+                    indexResult = index;
+                }
+
+            });
+        });
+
+
+        return indexResult;
+    }
+
+
+    //Swaps the mainplaylist with the song selected on the editplaylist
     swapPlaylistIndex(mainPlaylistSongId, subPlaylistSongId){
         this.playlist[mainPlaylistSongId] = this.fullPlaylist[mainPlaylistSongId][subPlaylistSongId];
     }
