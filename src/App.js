@@ -51,13 +51,17 @@ class App extends Component {
       FullPlaylist : service.getSubPlaylist(0), 
       isEdit: false,
       focusIdMain: 0,
-      focusIdEdit: 0,
+      focusIdEditArray: [],
       service: service
     };
     
     // this.state.service.swapPlaylistIndex(0, 1);
     // this.setState({PlaylistSongs: service.getPlaylist()});
 
+
+
+
+    
 
     // Binding
     this.playlistSongSelector = this.playlistSongSelector.bind(this);
@@ -66,7 +70,12 @@ class App extends Component {
     this.changeEditFocus = this.changeEditFocus.bind(this);
   }
 
+  componentDidMount(){
 
+    // Create empty focus edit id
+    let zeroArray = new Array(this.state.PlaylistSongs.length).fill(0);
+    this.setState({focusIdEditArray: zeroArray});
+  }
 
 
   // Gets the currently selected song from the user created playlist (this.state.PlaylistSongs)
@@ -97,11 +106,22 @@ class App extends Component {
   }
   changeEditFocus(divId, id){
     console.log(`DisplayBarContainer.getClickedId(${divId}, ${id}) Pressed.`);
+    let parentDivId = this.state.service.getParentIndexFromSongId(id)
+    console.log(`this.state.focusIdEditArray: ${this.state.focusIdEditArray}`);
+    
 
     //set default div to edit
-    this.setState({focusIdEdit: divId});
-    this.state.service.swapPlaylistIndex(this.state.service.getParentIndexFromSongId(id) , divId);
+    // this.setState({focusIdEdit: divId});
+    this.state.service.swapPlaylistIndex(parentDivId, divId);
 
+    //Adjust Array in state
+    let newEditArray = this.state.focusIdEditArray.slice();
+    newEditArray[parentDivId] = divId;
+
+    this.setState({focusIdEditArray: newEditArray});
+
+    // @TODO adjust the focus id on state.focusIdEditArray
+      // adjust the rendering of background color too.
   }
 
 
@@ -163,7 +183,7 @@ class App extends Component {
                 {
 
                   this.state.FullPlaylist.map((songData, i) => {
-                    let isFocus = (i === this.state.focusIdEdit ? true : false);
+                    let isFocus = (i === this.state.focusIdEditArray[this.state.service.getParentIndexFromSongId(songData.id)] ? true : false);
 
                     let component = (<DisplayBar key={songData.id} 
                                                 id={songData.id}
