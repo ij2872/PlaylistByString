@@ -10,7 +10,7 @@ import MyNav from './components/MyNav';
 import DisplayBarContainer from './components/DisplayBarContainer';
 import MusicService from './MusicService';
 import DisplayBar from './components/DisplayBar';
-
+import SearchForm from './components/SearchForm';
 
 
 class App extends Component {
@@ -155,21 +155,8 @@ class App extends Component {
           <Row>
             {/* Search Bar */}
             <Col xs="12">
-
-
-              {/*<Form>
-                <FormGroup row>
-                  <InputGroup>
-                    <InputGroupAddon addonType="prepend">Enter String</InputGroupAddon>                  
-                    <Input id="user-search"/>
-                    <InputGroupAddon addonType="append">
-                      <Button color="success">Create!</Button>
-                    </InputGroupAddon>
-                  </InputGroup>               
-                </FormGroup>
-              </Form>*/}
-
-              
+              <SearchForm formId="2">
+              </SearchForm>
             </Col>
 
             {/* Song List Container */}
