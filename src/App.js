@@ -202,7 +202,8 @@ class App extends Component {
                 {
 
                   this.state.SubPlaylist.map((songData, i) => {
-                    let isFocus = (i === this.state.focusIdEditArray[this.state.service.getParentIndexFromSongId(songData.id)] ? true : false);
+                    let isFocus = (i === this.state.focusIdEditArray[this.state.SubPlaylist[0].location.row] ? true : false);
+
 
                     let component = (<DisplayBar key={songData.id} 
                                                 id={songData.id}
