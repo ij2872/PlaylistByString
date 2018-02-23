@@ -1,0 +1,7 @@
+editArray[0, 0, 0, 0]
+
+Clicking [1] => [0, 0, 1, 0,]
+
+
+Clicking Function Order
+Displaybar.handleClick() => App.changeEditFocus(1, e2493iqjf192d19s)

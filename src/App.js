@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import './resc/bootstrap.min.css';
-import {Container, Row, Col, Input, Button, Form, FormGroup, Label, InputGroup, InputGroupAddon} from 'reactstrap';
+import {Container, Row, Col} from 'reactstrap';
+// Add Later: Input, Button, Form, FormGroup, InputGroup, InputGroupAddon
+
 
 import MyNav from './components/MyNav';
 import DisplayBarContainer from './components/DisplayBarContainer';
-import Displaybar from './components/DisplayBar';
 import MusicService from './MusicService';
 import DisplayBar from './components/DisplayBar';
 
@@ -55,32 +56,35 @@ class App extends Component {
       service: service
     };
     
-    // this.state.service.swapPlaylistIndex(0, 1);
-    // this.setState({PlaylistSongs: service.getPlaylist()});
-
-
-
-
     
 
-    // Binding
+    // |          Binding          |
+    // ----------------------------
     this.playlistSongSelector = this.playlistSongSelector.bind(this);
-    this.playlistEditSelector = this.playlistEditSelector.bind(this);
-    this.changeMainFocus = this.changeMainFocus.bind(this);
-    this.changeEditFocus = this.changeEditFocus.bind(this);
+    this.changeMainFocus      = this.changeMainFocus.bind(this);
+    this.changeEditFocus      = this.changeEditFocus.bind(this);
   }
 
+
+    // | React Component Rendering |
+    // ----------------------------
   componentDidMount(){
 
-    // Create empty focus edit id
+    // Create empty array onto this.state.focusIdEditArray
     let zeroArray = new Array(this.state.PlaylistSongs.length).fill(0);
     this.setState({focusIdEditArray: zeroArray});
   }
 
+    // |        Functions          |
+    // ----------------------------
 
-  // Gets the currently selected song from the user created playlist (this.state.PlaylistSongs)
+  /** 
+	 * Changes the focus of the Edit Song Container when the user changes the 
+   * focus on the main playlist
+	 * @param {string} songId - The id of the song Ex: "0WOxhx4hikIsyF3CRPLC8W"
+	 */
   playlistSongSelector(songId){
-    console.log(`app.playlistSongSelecter: songId = ${songId}`);
+    console.log(`App.playlistSongSelector: songId = ${songId}`);
 
     // Change the playlist focus of the change song container
     let subPlaylist = this.state.service.getSubPlaylistById(songId);
@@ -90,24 +94,28 @@ class App extends Component {
   }
 
 
-  // Render when a user edits the main playlist
-
-  //Changed the focus of the edit song playlist
-  playlistEditSelector(editSongId, mainSongId){
-    console.log(`app.playlistEditSelector(${editSongId}, ${mainSongId})`);
-  }
-
+  /**
+	 * Changes the focus of the main playlist
+	 * @param {int} divId - Integer row location
+	 * @param {string} id - String id of the song
+	 */
   changeMainFocus(divId, id){
-    console.log(`DisplayBarContainer.getClickedId(${divId}, ${id}) Pressed.`);
+    // console.log(`DisplayBarContainer.getClickedId(${divId}, ${id}) Pressed.`);
     this.playlistSongSelector(id);
+
     //set default div to edit
     this.setState({focusIdMain: divId});
-
   }
+  
+  /**
+	 * Changes the focus of the Edit playlist 
+   * and swaps the selected song from Edit playlist to Main playlist
+	 * @param {int} divId - Integer row location
+	 * @param {string} id - String id of the song
+	 */
   changeEditFocus(divId, id){
-    console.log(`DisplayBarContainer.getClickedId(${divId}, ${id}) Pressed.`);
+    console.log(`App.changeEditFocus(${divId}, ${id}) Pressed.`);
     let parentDivId = this.state.service.getParentIndexFromSongId(id)
-    console.log(`this.state.focusIdEditArray: ${this.state.focusIdEditArray}`);
     
 
     //set default div to edit
@@ -118,11 +126,11 @@ class App extends Component {
     let newEditArray = this.state.focusIdEditArray.slice();
     newEditArray[parentDivId] = divId;
 
-    this.setState({focusIdEditArray: newEditArray});
-
-    // @TODO adjust the focus id on state.focusIdEditArray
-      // adjust the rendering of background color too.
+    this.setState({focusIdEditArray: newEditArray}, () => {console.log(`focusIdEditArray[${this.state.focusIdEditArray}]`)});
+    
+    console.log(`newEditArray[${newEditArray}]`);
   }
+  
 
 
   render() {
@@ -141,7 +149,9 @@ class App extends Component {
           <Row>
             {/* Search Bar */}
             <Col xs="12">
-              <Form>
+
+
+              {/*<Form>
                 <FormGroup row>
                   <InputGroup>
                     <InputGroupAddon addonType="prepend">Enter String</InputGroupAddon>                  
@@ -151,7 +161,9 @@ class App extends Component {
                     </InputGroupAddon>
                   </InputGroup>               
                 </FormGroup>
-              </Form>
+              </Form>*/}
+
+              
             </Col>
 
             {/* Song List Container */}
@@ -179,7 +191,8 @@ class App extends Component {
 
             {/* Edit Song List Container */}  
             <Col md="8" sm="12">
-            <DisplayBarContainer>
+
+              <DisplayBarContainer>
                 {
 
                   this.state.FullPlaylist.map((songData, i) => {
@@ -198,12 +211,8 @@ class App extends Component {
                 }
               </DisplayBarContainer>       
             </Col>
-
-            
           </Row>
         </Container>
-        
-
       </div>
     );
   }

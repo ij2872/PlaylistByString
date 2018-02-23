@@ -69,6 +69,9 @@ class DisplayBar extends Component {
         });
     }
     
+    /**
+	 * runs App.changeMainFocus(divId, songId) or App.changeEditFocus(divId, songId)
+	*/
     handleClick(){
         this.props.changeFocus(this.props.divId, this.props.id);
         // console.log("<DisplayBar>: handleClick() => id = " + this.props.divId);
@@ -81,8 +84,6 @@ class DisplayBar extends Component {
         return (
             <div className={this.props.isFocus ? "Displaybar focus" : "Displaybar"}
                  onClick={this.handleClick} >
-                
-
                 
                 <div>{this.props.id}</div>
                 <div>{this.props.divId}</div>

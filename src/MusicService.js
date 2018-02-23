@@ -24,14 +24,44 @@ import search5 from './data/spotifyArtistSearch_up';
 //  ------(Private Functions)------
 //  
 //  log(e)             
-//      - e = element to console.log()
-//
-//  createSongObject(songObjectId, songObjectArtist, songObjectSong)
-//      songObjectId        = {int}
-//      songObjectArtist    = {string}
-//      songObjectSong      = {string}
-//      returns { id: songObjectId, artist: songObjectArtist, songTitle: songObjectSong }
 
+//  createSongObject(songObjectId, songObjectArtist, songObjectSong)
+
+/**
+ * [ MusicService ]
+ * 
+ * ----- -----
+ * log(e)
+ * getPlaylist()
+ * getSubPlaylist(row)
+ * getSubPlaylistById(songId)
+ * getParentIndexFromSongId(songId)
+ * createSongObject(songObjectId, songObjectARtist,songObjectSong)
+ * swapPlaylistIndex(mainPlaylistSongId, subPlaylistSongId)
+ * getFullPlaylist()
+ * printPlaylist()
+ * printFullPlaylist(row)
+ * 
+ * -----subPlaylist----- 
+ * addSong(art, song)
+ * removeSong(id)
+ * changeSong(id, newSongObj)
+ * 
+ * -----fullPlaylist----- 
+ * fp_add(arr)
+ * fp_renderPlaylist()
+ * 
+ * -----spotifyFunctions-----
+ * renderTrackResults()
+ * 
+ * 
+ * -----Private Functions-----
+ * createSongObject(songObjectId, songObjectARtist,songObjectSong)
+ * createSongObjectFromArray(arr)
+ * Spotift_JsonToSongObject(jsonSearchObject)
+ * 
+ * 
+ */
 class MusicService {
 
     constructor(){
@@ -89,7 +119,7 @@ class MusicService {
             playlist.forEach(elem => { 
                 // console.log(`contains() elem: ${elem.id}`);
                 if(elem.id === songId){
-                    console.log(`MusicService.getParentIndexFromSongId(${songId}) index found at [${index}]`);
+                    // console.log(`MusicService.getParentIndexFromSongId(${songId}) index found at [${index}]`);
                     
                     indexResult = index;
                 }
