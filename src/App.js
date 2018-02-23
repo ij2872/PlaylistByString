@@ -24,7 +24,7 @@ class App extends Component {
     // |    SERVICE TESTING       |
     service.renderTrackResults();
 
-    // service.printFullPlaylist(0);
+    // service.printSubPlaylist(0);
     
 
     // |    SERVICE TESTING END   |
@@ -49,7 +49,7 @@ class App extends Component {
 
     this.state = {
       PlaylistSongs: service.getPlaylist(),
-      FullPlaylist : service.getSubPlaylist(0), 
+      SubPlaylist : service.getSubPlaylist(0), 
       isEdit: false,
       focusIdMain: 0,
       focusIdEditArray: [],
@@ -73,6 +73,9 @@ class App extends Component {
     // Create empty array onto this.state.focusIdEditArray
     let zeroArray = new Array(this.state.PlaylistSongs.length).fill(0);
     this.setState({focusIdEditArray: zeroArray});
+
+    
+  
   }
 
     // |        Functions          |
@@ -90,7 +93,7 @@ class App extends Component {
     let subPlaylist = this.state.service.getSubPlaylistById(songId);
 
     // console.log(`App.playlistSongSelector(${songId}) subPlaylist = ${subPlaylist}`);
-    this.setState({FullPlaylist: subPlaylist});
+    this.setState({SubPlaylist: subPlaylist});
   }
 
 
@@ -114,11 +117,14 @@ class App extends Component {
 	 * @param {string} id - String id of the song
 	 */
   changeEditFocus(divId, id){
-    console.log(`App.changeEditFocus(${divId}, ${id}) Pressed.`);
-    let parentDivId = this.state.service.getParentIndexFromSongId(id)
-    
+    // console.log(`App.changeEditFocus(${divId}, ${id}) Pressed.`);
 
-    //set default div to edit
+    // Get the parent of the selected song on the Edit Playlist
+    // let parentDivId = this.state.service.getParentIndexFromSongId(id);
+    let parentDivId = this.state.SubPlaylist[0].location.row;
+
+
+    // set default div to edit
     // this.setState({focusIdEdit: divId});
     this.state.service.swapPlaylistIndex(parentDivId, divId);
 
@@ -128,7 +134,7 @@ class App extends Component {
 
     this.setState({focusIdEditArray: newEditArray}, () => {console.log(`focusIdEditArray[${this.state.focusIdEditArray}]`)});
     
-    console.log(`newEditArray[${newEditArray}]`);
+    // console.log(`newEditArray[${newEditArray}]`);
   }
   
 
@@ -195,7 +201,7 @@ class App extends Component {
               <DisplayBarContainer>
                 {
 
-                  this.state.FullPlaylist.map((songData, i) => {
+                  this.state.SubPlaylist.map((songData, i) => {
                     let isFocus = (i === this.state.focusIdEditArray[this.state.service.getParentIndexFromSongId(songData.id)] ? true : false);
 
                     let component = (<DisplayBar key={songData.id} 

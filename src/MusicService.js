@@ -71,7 +71,6 @@ class MusicService {
 
     log(str){
         console.log(str);
-        console.log(this.playlist);
     }
 
     //---playlist
@@ -250,16 +249,16 @@ class MusicService {
         // Render Full playlist
         // console.log("SpotifyAPI printTrackResult() ");
 
-        this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search1)));
-        this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search2)));
-        this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search3)));
-        this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search4)));
-        this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search5)));
+        this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search1), 0));
+        this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search2), 1));
+        this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search3), 2));
+        this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search4), 3));
+        this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search5), 4));
 
 
 
         
-        // this.printFullPlaylist(0);
+        // Render fullplaylist
         this.fp_renderPlaylist();
 
     }
@@ -277,29 +276,34 @@ class MusicService {
 
 
 
-//"Private Functions"
-// let log = (e) => {
-//     console.log(e);
-// }
+// -----"Private Functions"-----
 
 
-function createSongObject(songObjectId, songObjectArtist, songObjectSong){
+function createSongObject(songObjectId, songObjectArtist, songObjectSong, _row, _col){
+    // console.log(`MusicService.createSongObject: songObjectId=${songObjectId} row=${_row} col=${_col}`);
+
     return {
         id: songObjectId, 
         artist: songObjectArtist, 
-        songTitle: songObjectSong 
+        songTitle: songObjectSong,
+        location: {
+            row: _row,
+            column: _col
+        }
     };
 }
 
 // Returns array of song objects
-function createSongObjectFromArray(arr){
+function createSongObjectFromArray(arr, row){
     let songObjectArrayResult = [];
 
     arr.forEach((object, i) => {
-        // console.log("artist: " + object.artists[0].name)
-
-        let songObject = createSongObject(object.id, object.artists[0].name, object.name);
+        
+        let songObject = createSongObject(object.id, object.artists[0].name, object.name, row, i);
         songObjectArrayResult.push(songObject);
+
+
+        // console.log(`MusicService.createSongObjectFromArray: row=${songObject.location.row}`);        
     });
 
 
