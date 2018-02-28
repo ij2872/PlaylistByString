@@ -53,7 +53,7 @@ class SearchForm extends Component{
     // Validates data. Used on change and on submit.
     // @TODO test for malic. input or ".,/;'[]=-+_|\"
     validateData(str){
-        if(str.length > 150){
+        if(str.length > 150 || !str.match("^[a-zA-Z0-9]+$")){
             return false;
         }
 
@@ -61,15 +61,15 @@ class SearchForm extends Component{
     }
 
     render(){
-        this.props.children        
         return(
             <div>
+                {this.props.children}
                 <Form onSubmit={this.formSubmit}>
                     <FormGroup>
                         <Label for="searchBar">Sentence to Convert</Label>
                         <Input valid={this.state.isValidText} name="searchBar" placeholder="Place Holder Text To Search"
                             className="searchBar" value={this.state.formText} onChange={this.handleChange} autoComplete="off"/>
-                        <FormFeedback valid={this.state.isValidText}>String is too long.</FormFeedback>
+                        <FormFeedback valid={this.state.isValidText}>Invalid text or string is too long.</FormFeedback>
                         <FormText>Enter a sentence to convert to a Playlist.</FormText>
                         <br/>
                         <Button color="success">Create!</Button>

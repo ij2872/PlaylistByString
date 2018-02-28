@@ -6,9 +6,9 @@ import {Container, Row, Col} from 'reactstrap';
 // Add Later: Input, Button, Form, FormGroup, InputGroup, InputGroupAddon
 
 
+import MusicService from './MusicService';
 import MyNav from './components/MyNav';
 import DisplayBarContainer from './components/DisplayBarContainer';
-import MusicService from './MusicService';
 import DisplayBar from './components/DisplayBar';
 import SearchForm from './components/SearchForm';
 

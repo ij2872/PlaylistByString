@@ -1,8 +1,6 @@
-import search1 from './data/spotifyArtistSearch_never';
-import search2 from './data/spotifyArtistSearch_gonna';
-import search3 from './data/spotifyArtistSearch_give';
-import search4 from './data/spotifyArtistSearch_you';
-import search5 from './data/spotifyArtistSearch_up';
+import SpotifyService from './SpotifyService';
+
+
 
 // MusicService Class
 // 
@@ -67,6 +65,7 @@ class MusicService {
     constructor(){
         this.playlist = [];
         this.fullPlaylist = [];
+        this.SpotifyService = new SpotifyService("never gonna give you up");
     }
 
     log(str){
@@ -249,13 +248,13 @@ class MusicService {
         // Render Full playlist
         // console.log("SpotifyAPI printTrackResult() ");
 
-        this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search1), 0));
-        this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search2), 1));
-        this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search3), 2));
-        this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search4), 3));
-        this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search5), 4));
+        // this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search1), 0));
+        // this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search2), 1));
+        // this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search3), 2));
+        // this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search4), 3));
+        // this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search5), 4));
 
-
+        this.fullPlaylist = this.SpotifyService.getFullPlaylist();
 
         
         // Render fullplaylist
@@ -263,21 +262,13 @@ class MusicService {
 
     }
 
-    
-
-
     // ---------------------------
-
-
 }
 
 
 
 
-
-
 // -----"Private Functions"-----
-
 
 function createSongObject(songObjectId, songObjectArtist, songObjectSong, _row, _col){
     // console.log(`MusicService.createSongObject: songObjectId=${songObjectId} row=${_row} col=${_col}`);
@@ -294,31 +285,31 @@ function createSongObject(songObjectId, songObjectArtist, songObjectSong, _row, 
 }
 
 // Returns array of song objects
-function createSongObjectFromArray(arr, row){
-    let songObjectArrayResult = [];
+// function createSongObjectFromArray(arr, row){
+//     let songObjectArrayResult = [];
 
-    arr.forEach((object, i) => {
+//     arr.forEach((object, i) => {
         
-        let songObject = createSongObject(object.id, object.artists[0].name, object.name, row, i);
-        songObjectArrayResult.push(songObject);
+//         let songObject = createSongObject(object.id, object.artists[0].name, object.name, row, i);
+//         songObjectArrayResult.push(songObject);
 
 
-        // console.log(`MusicService.createSongObjectFromArray: row=${songObject.location.row}`);        
-    });
+//         // console.log(`MusicService.createSongObjectFromArray: row=${songObject.location.row}`);        
+//     });
 
 
-    return songObjectArrayResult;
-}
+//     return songObjectArrayResult;
+// }
 
 
 
 // Private Spotify Functions
 
-function Spotift_JsonToSongObject(jsonSearchObject){
-    // console.log("Spotift_JsonToSongObject: ");
-    // console.log(jsonSearchObject.tracks.items);
-    return jsonSearchObject.tracks.items;
-}
+// function Spotift_JsonToSongObject(jsonSearchObject){
+//     // console.log("Spotift_JsonToSongObject: ");
+//     // console.log(jsonSearchObject.tracks.items);
+//     return jsonSearchObject.tracks.items;
+// }
 
 
 
