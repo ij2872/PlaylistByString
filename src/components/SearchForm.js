@@ -53,7 +53,7 @@ class SearchForm extends Component{
     // Validates data. Used on change and on submit.
     // @TODO test for malic. input or ".,/;'[]=-+_|\"
     validateData(str){
-        if(str.length > 150 || !str.match("^[a-zA-Z0-9]+$")){
+        if(str.length > 150 || !str.match("^[a-zA-Z0-9 ]+$")){
             return false;
         }
 

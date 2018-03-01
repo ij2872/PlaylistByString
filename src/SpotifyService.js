@@ -3,20 +3,69 @@ import search2 from './data/spotifyArtistSearch_gonna';
 import search3 from './data/spotifyArtistSearch_give';
 import search4 from './data/spotifyArtistSearch_you';
 import search5 from './data/spotifyArtistSearch_up';
+// import { CLIENT_ID, CLIENT_SECRET } from './data/APIData';
+// import SpotifyWebApi from 'spotify-web-api-js';
 
 
 
+/** 
+ * ----[ SpotifyService ]----
+ * 
+ * ---- Global Vars ----
+ * {
+ *  this.query = []
+ *  this.spotifyDataArray = []
+ *  this.spotifyApi = new SpotifyApi()
+ * }
+ * 
+ * ---- Functions ----
+ *  getFullPlaylist()
+ *  Spotify_JsonToSongObject(jsonSearchObject)
+ *  --  render --
+ *  renderSpotifySongDataArray()
+ *  renderAll()
+ * 
+ * 
+ * ---- Private Functions ----
+ *  splitQuery(str)
+ *  cleanSongObject(songObjects, songStr, index)
+ *  createSongObject(songObjectId, songObjectArtist, songObjectSong, _row, _col)
+ *  createSongObjectFromArray(arr, row)
+ * 
+ * 
+ * ---- List of TODOS----
+ * @TODO Adjust to reuse song objects when user has a repeated query
+ * 
+*/
+
+
+
+
+//@TODO App uses Spotify wrapper for the client-side. Update it to work with the backend using a nodejs wrapper.
 class SpotifyService {
     constructor(userQuery){
         this.query = splitQuery(userQuery);
         this.spotifyDataArray = [];
         this.renderSpotifySongDataArray();
+
+        // this.spotify = new Spotify(CLIENT_SECRET);
+        // this.spotifyApi = new SpotifyWebApi();
+        // this.spotifyApi.setAccessToken("");
+        
+        // //spotifyAPI EXAMPLE ARTIST ALBUM GET
+        // this.spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE', function(err, data) {
+        //     if (err) console.error(err);
+        //     else console.log('Artist albums', data);
+        //   });
     }
 
     
 
     // ----- GETTERS -----
-
+    /**
+	 * Returns array with converted song objects
+     * @return {object} 
+	 */
     getFullPlaylist(){
         let playlistDataSongObjects = []
         // this.fullPlaylist.push(createSongObjectFromArray(Spotift_JsonToSongObject(search1), 0));
@@ -30,32 +79,42 @@ class SpotifyService {
             songObjects = cleanSongObject(songObjects, this.query[i], i);
 
             playlistDataSongObjects.push(songObjects);
-
-
         });
-
-        
         
         return playlistDataSongObjects;
     }
 
+    /**
+     * Gets tracks from spotifys api json file
+     * @param {json} jsonSearchObject Search track json data
+     * @return {object} 
+     */
     Spotify_JsonToSongObject(jsonSearchObject){
         return jsonSearchObject.tracks.items;
     }
 
     // ----- Render Functions -----
 
+    /**
+     * 
+     * Pushes gathered spotify Data to this.spotifyDataArray[]
+     * @return {void} 
+     */
     renderSpotifySongDataArray(){
-
         //push Spotify Playlist Results data to arr
         this.spotifyDataArray.push(search1);
         this.spotifyDataArray.push(search2);
         this.spotifyDataArray.push(search3);
         this.spotifyDataArray.push(search4);
         this.spotifyDataArray.push(search5);
-
+        
     }
 
+    /**
+     * 
+     * 
+     * @return {void}
+     */
     renderAll(){
         // Research songs needed
 

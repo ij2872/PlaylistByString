@@ -1,34 +1,10 @@
 import SpotifyService from './SpotifyService';
 
 
-
-// MusicService Class
-// 
-// ------(Class Functions)------
-//
-//  log(str)
-//      - str = {String}
-// 
-//  addSong(art, song)
-//      - art = {String}
-//      - song = {String}
-//  removeSong(id)
-//      - id = {int}
-//
-//  changeSong(id, newSongObj)
-//      - id = {int}
-//      - newSongObj = { id: {int}, artist: {string}, songTitle: {string} }
-//             
-//  ------(Private Functions)------
-//  
-//  log(e)             
-
-//  createSongObject(songObjectId, songObjectArtist, songObjectSong)
-
 /**
  * [ MusicService ]
  * 
- * ----- -----
+ * ----- Functions -----
  * log(e)
  * getPlaylist()
  * getSubPlaylist(row)
@@ -60,6 +36,7 @@ import SpotifyService from './SpotifyService';
  * 
  * 
  */
+
 class MusicService {
 
     constructor(){
